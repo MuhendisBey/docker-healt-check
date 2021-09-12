@@ -1,0 +1,35 @@
+version: '3'
+services:
+  service-a:
+    build: ./serviceA
+    image: kageja/docker-health-check-servicea
+    healthcheck:
+      test: "wget --spider -q http://localhost:8080/actuator/health || exit 1"
+      interval: 5s
+      timeout: 5s
+      start_period: 10s
+      retries: 10
+    networks:
+      - docker-health-check-service-net
+    ports:
+      - "2880:8080"
+
+  service-b:
+    build: ./serviceB
+    image: kageja/docker-health-check-serviceb
+    depends_on:
+      - service-a
+    healthcheck:
+      test: "wget --spider -q http://localhost:8080/actuator/health || exit 1"
+      interval: 5s
+      timeout: 5s
+      start_period: 10s
+      retries: 10
+    networks:
+      - docker-health-check-service-net
+    ports:
+      - "2881:8080"
+
+networks:
+  docker-health-check-service-net:
+
