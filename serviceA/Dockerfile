@@ -1,7 +1,7 @@
 FROM maven:3-jdk-11 as BUILDER
 WORKDIR /opt/app
 COPY . .
-RUN mvn package \
+RUN mvn package && \
     ls /opt/app/target
 
 FROM azul/zulu-openjdk-alpine:11-jre
