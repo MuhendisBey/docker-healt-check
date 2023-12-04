@@ -2,7 +2,7 @@ version: '3'
 services:
   service-a:
     build: ./serviceA
-    image: "${DOCKER_HUB_USERNAME}/${REGISTRYNAME}:servicea
+    image: "${DOCKER_HUB_USERNAME}/${REGISTRYNAME}:servicea"
     healthcheck:
       test: "wget --spider -q http://localhost:8080/actuator/health || exit 1"
       interval: 5s
@@ -16,7 +16,7 @@ services:
 
   service-b:
     build: ./serviceB
-    image: "${DOCKER_HUB_USERNAME}/${REGISTRYNAME}:serviceb
+    image: "${DOCKER_HUB_USERNAME}/${REGISTRYNAME}:serviceb"
     depends_on:
       - service-a
     healthcheck:
